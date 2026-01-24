@@ -75,11 +75,11 @@
 5.Project Structure
 
    credit-card-default/
-   │── app.py
-   │── requirements.txt
-   │── README.md
-   │── data/
-   │   └── credit-card.csv
+   |── app.py 
+   |── requirements.txt
+   |── README.md
+   |── data/
+      └-credit-card.csv
    │── model/
       ├── train_utils.py
       ├── logistic.py
@@ -123,9 +123,26 @@
 
 8.How to Run the Project Locally
 
-    conda activate ml2
-    python app.py
-    streamlit run app.py
+### Option 1: Run using Streamlit Community Cloud (Recommended)
+The application is deployed on Streamlit Community Cloud.  
+Simply open the live app link provided in the submission to interact with the models.
+
+---
+
+### Option 2: Run Locally
+
+#### Step 1: Clone the repository
+```bash
+git clone https://github.com/Sandysunny123/credit-card-default.git
+cd credit-card-default
+```
+#### Step 2: Install dependencies
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+
+```
+
 
 
 9. Conclusion
