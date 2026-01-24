@@ -52,15 +52,13 @@
     
     Model Comparison Table
 
-    | ML Model | Accuracy | AUC | Precision | Recall | F1 | MCC |
-|---------|----------|-----|-----------|--------|----|-----|
-| Logistic Regression | 0.8080 | 0.7078 | 0.6882 | 0.2411 | 0.3571 | 0.3261 |
-| Decision Tree | 0.7233 | 0.6092 | 0.3817 | 0.4047 | 0.3928 | 0.2140 |
-| KNN | 0.7935 | 0.6942 | 0.5530 | 0.3459 | 0.4256 | 0.3204 |
-| Naive Bayes | 0.7523 | 0.7251 | 0.4513 | 0.5554 | 0.4980 | 0.3391 |
-| Random Forest (Ensemble) | 0.8137 | 0.7549 | 0.6370 | 0.3662 | 0.4651 | 0.3824 |
-| XGBoost (Ensemble) | 0.8090 | 0.7590 | 0.6162 | 0.3617 | 0.4558 | 0.3676 |
-
+    ML Model	            Accuracy  AUC	Precision	Recall	F1	MCC
+    Logistic Regression	    0.8080	0.7078	0.6882	0.2411	0.3571	0.3261
+    Decision Tree	            0.7233	0.6092	0.3817	0.4047	0.3928	0.2140
+    KNN	                    0.7935	0.6942	0.5530	0.3459	0.4256	0.3204
+    Naive Bayes	            0.7523	0.7251	0.4513	0.5554	0.4980	0.3391
+    Random Forest(Ensemble)	    0.8137	0.7549	0.6370	0.3662	0.4651	0.3824
+    XGBoost (Ensemble)	    0.8090	0.7590	0.6162	0.3617	0.4558	0.3676
 
 
 4.Model Performance Observations
