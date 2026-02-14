@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import joblib
 
+import os
+
+
 
 from sklearn.metrics import (
     confusion_matrix,
@@ -21,10 +24,13 @@ MODEL_DIR = "model/saved"
 DATA_PATH = "data/credit-card.csv"
 TARGET_COL = "default.payment.next.month"
 
+TEST_DATA_PATH = "data/test_data.csv"
+
 
 # -----------------------------
 # Load scaler and models
 # -----------------------------
+FEATURES  = joblib.load(f"{MODEL_DIR}/features.pkl")
 scaler = joblib.load(f"{MODEL_DIR}/scaler.pkl")
 
 models = {
@@ -63,6 +69,21 @@ st.caption(
     "This application supports both default sample data and user-uploaded test CSV files."
 )
 
+st.markdown("### 📥 Download Test Dataset Used for Evaluation")
+
+if os.path.exists(TEST_DATA_PATH):
+    with open(TEST_DATA_PATH, "rb") as f:
+        st.download_button(
+            label="Download test_data.csv",
+            data=f,
+            file_name="test_data.csv",
+            mime="text/csv"
+        )
+else:
+    st.warning("Test dataset not found. Please run train_model.py first.")
+
+
+
 st.write("Machine Learning Assignment 2 – Classification Models Comparison")
 
 # -----------------------------
@@ -99,9 +120,9 @@ else:
     full_df = pd.read_csv(DATA_PATH)
     test_df = full_df.sample(500, random_state=42)
 
-TARGET_COL = "default.payment.next.month"
 
 X_test = test_df.drop(columns=[TARGET_COL], errors="ignore")
+X_test = X_test[FEATURES]
 y_test = test_df[TARGET_COL] if TARGET_COL in test_df.columns else None
 
 
@@ -122,7 +143,13 @@ if view_type == "All Models Comparison":
                 X_eval = X_test
 
             y_pred = model.predict(X_eval)
-            y_prob = model.predict_proba(X_eval)[:, 1]
+            # y_prob = model.predict_proba(X_eval)[:, 1]
+
+            if hasattr(model, "predict_proba"):
+                y_prob = model.predict_proba(X_eval)[:, 1]
+            else:
+                y_prob = model.predict(X_eval)
+
 
             metrics = compute_metrics(y_test, y_pred, y_prob)
             metrics["Model"] = name
@@ -147,7 +174,13 @@ else:
     y_pred = model.predict(X_eval)
 
     if y_test is not None:
-        y_prob = model.predict_proba(X_eval)[:, 1]
+        # y_prob = model.predict_proba(X_eval)[:, 1]
+
+        if hasattr(model, "predict_proba"):
+            y_prob = model.predict_proba(X_eval)[:, 1]
+        else:
+            y_prob = model.predict(X_eval)
+
 
         st.write("### Classification Report")
         report = classification_report(y_test, y_pred, output_dict=True)
