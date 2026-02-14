@@ -69,7 +69,7 @@ st.caption(
     "This application supports both default sample data and user-uploaded test CSV files."
 )
 
-st.markdown("### 📥 Download Test Dataset Used for Evaluation")
+st.markdown("##  Download Test Data ")
 
 if os.path.exists(TEST_DATA_PATH):
     with open(TEST_DATA_PATH, "rb") as f:
